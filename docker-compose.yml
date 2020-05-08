@@ -1,0 +1,18 @@
+version: '2'
+services:
+  vpn_rinetd:
+    image: degart/vpn_rinetd:v.0.0.1
+    environment:
+      FORWARDING_RULES: >
+        0.0.0.0   14222  xxx.xx.xxx.xx  22;
+    env_file:
+          - ./config.env
+    ports:
+      - 127.0.0.1:14222:14222
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - label:disable
+    tty: true
+    stdin_open: true
